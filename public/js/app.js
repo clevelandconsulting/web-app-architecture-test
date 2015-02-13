@@ -40,14 +40,27 @@ obj.publish('nameChange', 'john'); //sam, john
 */
 
 //console.log(Navigation);
+var App = function() {
+	var Navigation = require('./modules/module.navigation');
+	var Core = require('./core-backbone');
+	var Simple = require('./modules/module.simple');
+	
+	
+	Navigation.config({
+		items: [
+			{name: 'home', link: 'home.html', sort: 2},
+			{name: 'about', link: 'about.html', sort: 1}
+		]
+	});
+	
+		
+	Core.modules.register(Navigation);
+	
+	Core.modules.start(Navigation.id);
+	
+	Core.modules.register(Simple);
+	
+	Core.modules.start(Simple.id);
+};
 
-Navigation.config({
-	items: [
-		{name: 'home', link: 'home.html'},
-		{name: 'about', link: 'about.html'}
-	]
-});
-
-Core.modules.register(Navigation);
-
-Core.modules.start(Navigation.id);
+App();

@@ -1,4 +1,6 @@
-var Sandbox = {
+//require('./core-backbone.js');
+
+module.exports = {
 	create: function (core, moduleID) {
 		return {
 			utils: {
@@ -24,41 +26,62 @@ var Sandbox = {
 				}
 			},
 			view: {
-				create: function () {
-					return core.view.create();
+				makeCollectionView: function (config) {
+					return core.view.createCollectionView(config);
 				},
+				initCollectionView: function (View, model) {
+					var v = core.view.get(View, model);
+					//console.log('new view = ', v);
+					return v;
+				},
+				createCollectionView: function(config, model) {
+					var View = this.makeCollectionView(config);
+					return this.initCollectionView(View,model);
+				},
+				
 				create_element: function (html) {
 					return core.view.create_element(html);
 				},
 				renderCollection: function(container,items,template) {
 					return core.view.renderCollection(container,items,template);
 				},
-				/*
-build: function (object, template) {
-					return core.view.renderTemplate(object,template);
-				},
-				addHTMLToContainerAtEnd: function (container, html) {
-					return core.view.addHTML(container, html, 'beforeend');
-				},
-*/
 				addToBody: function(element) {
 					return core.view.addToBody(element);
 				},
 			},
+			model: {
+				make: function(config) {
+					return core.model.create(config);
+				},
+				init: function (Model) {
+					return core.model.get(Model);
+				},
+				create: function(config) {
+					var Model = this.make(config);
+					return this.init(Model);
+				}
+			},
 			collection: {
-				create: function() {
-					return core.collection.create();
+				make: function(config) {
+					return core.collection.create(config);
+				},
+				init: function (Collection) {
+					return core.collection.get(Collection);
+				},
+				create: function(config) {
+					var Collection = this.make(config);
+					return this.init(Collection);
 				}
 			},
 			events: {
-				notify: function(object) {
-					return core.events.notify(moduleID, object);
+				notify: function(event) {
+					return core.events.notify(moduleID, event);
 				},
-				addEvent: function(container, eventInfo, objectHash, object) {
-					return core.events.bind(container,eventInfo,objectHash, object);
+				register: function(events) {
+					return core.events.register(moduleID, events);
 				}
 			},
 			log: core.log
 		};
 	}
-}
+};

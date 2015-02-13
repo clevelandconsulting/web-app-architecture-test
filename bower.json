@@ -1,0 +1,20 @@
+{
+  "name": "largewebapp-test",
+  "version": "0.0.0",
+  "homepage": "https://github.com/clevelandconsulting/web-app-architecture-test",
+  "authors": [
+    "Kevin Vile <kevin@clevelandconsulting.com>"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "backbone": "~1.1.2",
+    "handlebars": "~3.0.0"
+  }
+}

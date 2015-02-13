@@ -9,6 +9,7 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "jade": "^1.9.2"
+    "jade": "^1.9.2",
+    "leaky": "^0.1.3"
   }
 }
